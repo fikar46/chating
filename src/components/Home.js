@@ -13,20 +13,7 @@ class Home extends Component{
     state={
         avatar:'https://firebasestorage.googleapis.com/v0/b/nfchat-ecf36.appspot.com/o/avatar%2Fdefault.png?alt=media&token=40d5b750-30ab-42bb-9256-8f5dec882bbc'
     }
- componentDidMount(){
-    this.getAvatar(this.props.profileUser[0].image)
- }
- getAvatar=(image)=>{
-    const storage = firebase.storage().ref()
-    storage.child(`avatar/${image}`).getDownloadURL()
-    .then((url)=>{
-        this.setState({avatar:url})
-        console.log(url)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
- }
+ 
 curhat=()=>{
     this.props.screenProps.rootNavigation.navigate('Curhat');
  }
@@ -70,21 +57,9 @@ home=()=>{
     const { 
         containerStyle
     } = styles; 
-    if(this.props.profileUser[0].status == 'guru'){
-        return(
-            <View>
-                <Card>
-                    <TouchableHighlight onPress={this.curhat}>
-                        <CardSection >
-                            <Text style={containerStyle}>Accept guru</Text>  
-                        </CardSection>
-                    </TouchableHighlight>  
-                </Card> 
-            </View>
-        )
-    }else{
+   
         return this.user()
-    }
+    
 }
     render(){
         const { headerContentStyle, 
@@ -110,8 +85,8 @@ home=()=>{
                                <Thumbnail source={{ uri: this.state.avatar }} />
                     </View>
                         <View style={headerContentStyle}>
-                            <Text style={headerTextStyle}>{this.props.profileUser[0].username}</Text>
-                            <Text>{this.props.profileUser[0].nomornf}</Text>
+                            <Text style={headerTextStyle}>test</Text>
+                            <Text>12</Text>
                         </View>
                     </CardSection>
                 </Card>

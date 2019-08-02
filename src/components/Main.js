@@ -12,9 +12,6 @@ export default createStackNavigator(
         MainMenu: {
             screen:  ({ navigation }) => <Screen screenProps={{ rootNavigation: navigation }} />
         },
-        VerifiedProfile:{
-            screen : Post
-        },
         Curhat:{
             screen:Curhat
         }

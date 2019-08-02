@@ -27,7 +27,7 @@ class Authentication extends Component {
         if(this.props.user) {
             const resetAction = StackActions.reset({
                 index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'VerifiedProfile' })],
+                actions: [NavigationActions.navigate({ routeName: 'MainMenu' })],
             });
             this.props.navigation.dispatch(resetAction);
         }

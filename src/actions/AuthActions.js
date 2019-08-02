@@ -62,8 +62,7 @@ export const registGuru = ({ username, lokasinf, nomornf,guru,status,image, emai
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => {
                 loginUserSuccess(dispatch, user);
-                const { currentUser } = firebase.auth();
-                firebase.database().ref(`/users/${currentUser.uid}`)
+                firebase.database().ref(`/guru`)
                 .push({ username, lokasinf, nomornf,guru,status,email,image })
                 .then(() => {
                     dispatch({ type: PROFILE_CREATE });

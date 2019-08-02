@@ -27,7 +27,7 @@ class RegisterGuru extends Component {
     }
 
     onButtonPress = () => {
-        const {username, lokasinf, nomornf,guru, email, password,image } = this.props;
+        const {username, lokasinf, nomornf,guru,status, email, password,image } = this.props;
         this.props.registGuru({ username, lokasinf, nomornf,guru,status,image, email, password });
         // this.props.profileCreate(username, lokasinf, nomornf,email,image);
     }

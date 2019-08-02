@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 import { View, Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import {  } from '../actions';
+import { getGurulist} from '../actions';
 import { Card,CardSection } from './common';
 import {Container, Header, Left, Title, Body, Right,Thumbnail} from 'native-base';
 import {Icon} from 'react-native-elements';
+import _ from 'lodash';
 class Curhat extends Component {
     state={
         avatar:'https://firebasestorage.googleapis.com/v0/b/nfchat-ecf36.appspot.com/o/avatar%2Fdefault.png?alt=media&token=40d5b750-30ab-42bb-9256-8f5dec882bbc'
     }
  componentDidMount(){
-    // this.getAvatar(this.props.profileUser[0].image)
+    this.props.getGurulist()
  }
- getAvatar=(image)=>{
-    const storage = firebase.storage().ref()
-    storage.child(`avatar/${image}`).getDownloadURL()
-    .then((url)=>{
-        this.setState({avatar:url})
-        console.log(url)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+ guru =()=>{
+     const { headerContentStyle, 
+        headerTextStyle,
+        thumbnailContainerStyle,
+    } = styles;
+     this.props.guruList.map((item)=>{
+        return(
+            <CardSection>
+            <View style={thumbnailContainerStyle}>
+                       <Thumbnail source={{ uri: item.image }} />
+            </View>
+                <View style={headerContentStyle}>
+                    <Text style={headerTextStyle}>{item.username}</Text>
+                    <Text>guru {item.guru}</Text>
+                </View>
+            </CardSection>
+         );
+     })
  }
     render() {
         const { headerContentStyle, 
@@ -32,17 +41,17 @@ class Curhat extends Component {
         return (
             <Container>
             <Header>
-            <Left>
-            <Icon name='monochrome-photos' color='white' size={25}/>
-            </Left>
-        <Body >
-        <Title>NFChat</Title>
-        </Body>
-        <Right>   
-        </Right>
+                <Left>
+                     <Icon name='monochrome-photos' color='white' size={25}/>
+                </Left>
+                <Body >
+                     <Title>NFChat</Title>
+                </Body>
+                <Right>   
+                </Right>
             </Header>
             <View>
-            <Card>
+                <Card>
                     <CardSection>
                     <View style={thumbnailContainerStyle}>
                                <Thumbnail source={{ uri: this.state.avatar }} />
@@ -52,6 +61,7 @@ class Curhat extends Component {
                             <Text>guru bidang</Text>
                         </View>
                     </CardSection>
+                    {this.guru()}
                 </Card>
             </View>
         </Container>
@@ -85,9 +95,11 @@ const styles = {
     }
 }
 const mapStateToProps = (state) => {
-    const { username, lokasinf, nomornf} = state.profileForm;
-    
-    return {username,lokasinf,nomornf };
+    const guruList = _.map(state.guruList, (val, uid) => {
+        return { ...val, uid };
+    });
+    console.log(guruList)
+    return {guruList};
 };
 
-export default connect(mapStateToProps, {  })(Curhat);
+export default connect(mapStateToProps, {getGurulist})(Curhat);

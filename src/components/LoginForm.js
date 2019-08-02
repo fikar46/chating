@@ -7,15 +7,7 @@ import { Container, Header, Left,Body,Right,Title} from 'native-base';
 import {Icon} from 'react-native-elements'
 class LoginForm extends Component {
 
-    componentDidUpdate() {
-        if(this.props.user) {
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'VerifiedProfile' })],
-            });
-            this.props.navigation.dispatch(resetAction);
-        }
-    }
+  
 
     onEmailChange = (text) => {
         this.props.emailChanged(text);
